@@ -11,10 +11,9 @@ import {
 
 const AllQuestions = () => {
   const [questions, setQuestions] = useState([]); // Store questions in state
-
   useEffect(() => {
     axios
-      .get("https://stack-overflow-api1.onrender.com/")
+      .get(`${process.env.REACT_APP_API_URL}`)
       .then(function (response) {
         // handle success
         setQuestions(response.data); // Update state with fetched questions

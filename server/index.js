@@ -14,4 +14,4 @@ async function main() {
   app.use(questionsRoutes);
 }
 
-app.listen("3000", console.log("running server"));
+app.listen("3003", console.log("running server"));

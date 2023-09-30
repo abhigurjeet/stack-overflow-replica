@@ -1,4 +1,4 @@
-import Questions from "../../components/Questions";
+import Questions from "../../components/AllQuestions";
 
 const Home = () => {
   return (

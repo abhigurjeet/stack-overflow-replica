@@ -21,7 +21,7 @@ exports.getQuestion = async (req, res) => {
 };
 exports.getAllAnswers = async (req, res) => {
   try {
-    const { questionId } = req.body;
+    const questionId = req.params.id;
     const answers = await Answer.find({ questionId });
     res.status(200).send(answers);
   } catch (error) {
@@ -62,7 +62,8 @@ exports.addQuestion = async (req, res) => {
 
 exports.addAnswer = async (req, res) => {
   try {
-    const { questionId, answerDetail } = req.body;
+    const questionId = req.params.id;
+    const { answerDetail } = req.body;
     const newAnswer = new Answer({ questionId, answerDetail, acceptedBy: [] });
     await newAnswer.save(); // Wait for the answer to be saved
     return res.status(200).send("Answer added");

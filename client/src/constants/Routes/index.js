@@ -1,7 +1,7 @@
 import Login from "../../container/Auth/login";
 import SignUp from "../../container/Auth/signUp";
 import Home from "../../container/Home";
-import Question from "../../container/Question";
+import Question from "../../container/QuestionAnswer";
 const routesConfig = [
   {
     path: "/",
@@ -16,7 +16,7 @@ const routesConfig = [
     element: <SignUp />,
   },
   {
-    path: "/questions/:qId",
+    path: "/question/:qId",
     element: <Question />,
   },
 ];

@@ -9,7 +9,7 @@ import {
   AnswerText,
 } from "./questions.style";
 
-const Questions = () => {
+const AllQuestions = () => {
   const [questions, setQuestions] = useState([]); // Store questions in state
 
   useEffect(() => {
@@ -28,10 +28,10 @@ const Questions = () => {
   return (
     <Container>
       {questions.map((item) => (
-        <QuestionContainer key={item.id}>
+        <QuestionContainer key={item._id}>
           <Flex>
             <UserName>{item.user}</UserName>
-            <QuestionTitle to={`/questions/${item._id}`}>
+            <QuestionTitle to={`/question/${item._id}`}>
               {item.title}
             </QuestionTitle>
             <AnswerText>{item.body}</AnswerText>
@@ -42,4 +42,4 @@ const Questions = () => {
   );
 };
 
-export default Questions;
+export default AllQuestions;

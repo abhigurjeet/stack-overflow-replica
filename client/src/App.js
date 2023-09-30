@@ -1,8 +1,8 @@
 import React from "react";
 import GlobalStyles from "./GlobalStyles";
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
-import routesConfig from "./constant/Routes";
+import routesConfig from "./constants/Routes";
 
 function App() {
   return (

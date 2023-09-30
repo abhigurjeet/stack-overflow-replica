@@ -23,7 +23,7 @@ const Navbar = () => {
           onChange={(e) => setSearchTag(e.target.value)}
           placeholder="Search"
         />
-        <SearchBtn onClick={() => console.log(searchTag)}>Search</SearchBtn>
+        <SearchBtn>Search</SearchBtn>
       </Wrapper>
       <BtnContainer>
         <LoginBtn>Log In</LoginBtn>

@@ -13,10 +13,10 @@ exports.getAllQuestions = async (req, res) => {
 exports.getQuestion = async (req, res) => {
   try {
     const questionId = req.params.id;
-    const question = Question.find({ id: questionId });
+    const question = await Question.find({ _id: questionId });
     res.status(200).send(question);
   } catch (error) {
-    res.status(500).send("Error getting all questions: " + error.message);
+    res.status(500).send("Error getting question: " + error.message);
   }
 };
 exports.getAllAnswers = async (req, res) => {

@@ -31,7 +31,7 @@ const Questions = () => {
         <QuestionContainer key={item.id}>
           <Flex>
             <UserName>{item.user}</UserName>
-            <QuestionTitle to={`/questions/${item.id}`}>
+            <QuestionTitle to={`/questions/${item._id}`}>
               {item.title}
             </QuestionTitle>
             <AnswerText>{item.body}</AnswerText>

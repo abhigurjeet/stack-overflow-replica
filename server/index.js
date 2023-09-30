@@ -1,15 +1,17 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const mongoose = require("mongoose");
 const questionsRoutes = require("./routes/questionsRoutes");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 main().catch((err) => console.log(err));
-
 async function main() {
-  await mongoose.connect(
-    "mongodb+srv://abhigurjeet:dq250IwFtEVMq8Nd@cluster0.mjkbohf.mongodb.net/mainDb"
-  );
+  app.use(cors());
+  await mongoose.connect(`${process.env.DATABASE_URL}/mainDb`);
   app.use(questionsRoutes);
 }
 
-app.listen("3001", console.log("running server"));
+app.listen("3000", console.log("running server"));

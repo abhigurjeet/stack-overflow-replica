@@ -1,13 +1,38 @@
 const User = require("../models/user");
 const Question = require("../models/question");
-
+const Answer = require("../models/answer");
 exports.getAllQuestions = async (req, res) => {
   try {
     const questions = await Question.find({});
-    res.send(questions);
+    res.status(200).send(questions);
   } catch (error) {
     // Handle the error here
     res.status(500).send("Error getting all questions: " + error.message);
+  }
+};
+exports.getAllAnswers = async (req, res) => {
+  try {
+    const { questionId } = req.body;
+    const answers = await Answer.find({ questionId });
+    res.status(200).send(answers);
+  } catch (error) {
+    // Handle the error here
+    res.status(500).send("Error getting all questions: " + error.message);
+  }
+};
+exports.addUser = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (!user) {
+      const newUser = new User({ username, password });
+      await newUser.save();
+      res.status(200).send("User added");
+    } else {
+      return res.status(409).send("username already exists");
+    }
+  } catch (error) {
+    res.status(500).send("Error creating new User: " + error.message);
   }
 };
 
@@ -18,47 +43,23 @@ exports.addQuestion = async (req, res) => {
     if (!user) {
       return res.status(404).send("User not found");
     }
-    const newQuestion = new Question({
-      user: user._id, // Set the user field to the user's _id
-      title: "This is the first question",
-      body: "This is a shipments assignment. So how do we proceed further?",
-      tags: ["first", "shipments"],
-    });
-    res.send(questions);
+    const newQuestion = new Question({ user: user._id, title, body, tags });
+    await newQuestion.save();
+    res.status(200).send("Question added");
   } catch (error) {
     // Handle the error here
     res.status(500).send("Error creating a new question: " + error.message);
   }
 };
 
-exports.addUser = async (req, res) => {
+exports.addAnswer = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (!user) {
-      const newUser = new User({ username, password });
-      await newUser.save();
-    } else {
-      return res.status(409).send("username already exists");
-    }
+    const { questionId, answerDetail } = req.body;
+    const newAnswer = new Answer({ questionId, answerDetail, acceptedBy: [] });
+    await newAnswer.save(); // Wait for the answer to be saved
+    return res.status(200).send("Answer added");
   } catch (error) {
     // Handle the error here
-    res
-      .status(500)
-      .send(
-        "Error creating new User, make sure username and password is not empty. Error message: " +
-          error.message
-      );
+    res.status(500).send("Error adding new answer: " + error.message);
   }
 };
-// const user = await User.findOne({ username: "Gurjeet" });
-// if (!user) {
-//   return res.status(404).send("User not found");
-// }
-// const newQuestion = await new Question({
-//   user: user._id, // Set the user field to the user's _id
-//   title: "This is the fourth question",
-//   body: "This is a shipments assignment. So how do we proceed further?",
-//   tags: ["fourth", "shipments"],
-// });
-// await newQuestion.save();

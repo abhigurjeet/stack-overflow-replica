@@ -1,14 +1,17 @@
 # stack-overflow-replica
-
-This is a MERN stack app. The backend is hosted on render.com and the frontend can be run locally on the system using below commands:
+<br/><br/>
+This is a MERN stack app. The backend is hosted on render.com and the frontend is hosted on vercel.<br/><br/><br/>
+Website link -[Live](https://stack-overflow-replica.vercel.app/)
+<br/><br/>
+Steps to run the frontend locally:
 
 1. git clone https://github.com/abhigurjeet/stack-overflow-replica.git
 2. cd client
 3. npm install
-4. npm start
-   These steps are enough to run the entire application.
+4. Create .env file in server directory and add ---> REACT_APP_API_URL= <server address>
+5. npm start
 
-
+<br/><br/>
    
 If you want to run backend locally as well then follow below steps for server side:
 1. Run - cd server
@@ -17,4 +20,6 @@ If you want to run backend locally as well then follow below steps for server si
 4. Create .env file in server directory and add ---> DATABASE_URL= <Database connection string>
 5. Run - nodemon index.js
 
-   Change the url for the axios requests to localhost address on which the backend is running.
+
+<br/><br/>
+Styling is pending and some other features are pending.

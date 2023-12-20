@@ -9,20 +9,21 @@ import {
   AnswerText,
 } from "./questions.style";
 
-const AllQuestions = () => {
+const AllQuestions = (props) => {
   const [questions, setQuestions] = useState([]); // Store questions in state
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}`)
       .then(function (response) {
         // handle success
+        response.data.reverse();
         setQuestions(response.data); // Update state with fetched questions
       })
       .catch(function (error) {
         // handle error
         console.log(error);
       });
-  }, []); // Empty dependency array ensures useEffect runs only once after initial render
+  }, [props.triggerRender]); // Empty dependency array ensures useEffect runs only once after initial render
 
   return (
     <Container>

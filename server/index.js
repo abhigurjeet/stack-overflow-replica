@@ -10,7 +10,10 @@ app.use(express.urlencoded({ extended: true }));
 main().catch((err) => console.log(err));
 async function main() {
   app.use(cors());
-  await mongoose.connect(`${process.env.DATABASE_URL}/mainDb`);
+  await mongoose.connect(`${process.env.DATABASE_URL}/mainDb`).then(
+    (res) => console.log("connected"),
+    (err) => console.log("error")
+  );
   app.use(questionsRoutes);
 }
 

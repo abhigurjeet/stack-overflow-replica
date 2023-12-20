@@ -52,7 +52,7 @@ exports.addQuestion = async (req, res) => {
       return res.status(404).send("User not found");
     }
     const newQuestion = new Question({ user: user._id, title, body, tags });
-    await newQuestion.save();
+    newQuestion.save();
     res.status(200).send("Question added");
   } catch (error) {
     // Handle the error here
@@ -65,8 +65,10 @@ exports.addAnswer = async (req, res) => {
     const questionId = req.params.id;
     const { answerDetail } = req.body;
     const newAnswer = new Answer({ questionId, answerDetail, acceptedBy: [] });
-    await newAnswer.save(); // Wait for the answer to be saved
-    return res.status(200).send("Answer added");
+    const addedAnswer = await newAnswer.save().then((ans) => {
+      return ans;
+    });
+    return res.status(200).send(addedAnswer);
   } catch (error) {
     // Handle the error here
     res.status(500).send("Error adding new answer: " + error.message);
@@ -98,3 +100,5 @@ exports.editQuestion = async (req, res) => {
     res.status(500).send("Error updating question: " + error.message);
   }
 };
+
+exports;

@@ -23,8 +23,8 @@ const Navbar = () => {
         <SearchBtn>Search</SearchBtn>
       </Wrapper>
       <BtnContainer>
-        <LoginBtn>Log In</LoginBtn>
-        <SignUpBtn>Sign Up</SignUpBtn>
+        <LoginBtn to={"/login"}>Log In</LoginBtn>
+        <SignUpBtn to={"/signup"}>Sign Up</SignUpBtn>
       </BtnContainer>
     </Nav>
   );

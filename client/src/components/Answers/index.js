@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  AnswerContainer,
+  AnswerInnerContainer,
+  Container,
+  Flex,
+} from "./answers.style";
 const Answers = ({ qId }) => {
   const [questionData, setQuestionData] = useState(null);
   const [allAnswers, setAllAnswers] = useState([]);
@@ -18,7 +24,7 @@ const Answers = ({ qId }) => {
   if (questionData)
     return (
       <div>
-        <div>
+        <Container>
           <h1>{questionData.title}</h1>
           <h2>{questionData.body}</h2>
           <h4>Question by {questionData.user}</h4>
@@ -28,26 +34,21 @@ const Answers = ({ qId }) => {
               <span key={i}>{item} </span>
             ))}
           </h5>
-        </div>
-        <hr />
-        <hr />
-        <hr />
-        <hr />
-        <div>
+        </Container>
+        <AnswerContainer>
           {/* answers printed here */}
           {allAnswers.length !== 0 ? (
             allAnswers.map((item) => {
               return (
-                <>
+                <Flex>
                   <h3>{item.answerDetail}</h3>
-                  <hr />
-                </>
+                </Flex>
               );
             })
           ) : (
             <p>No answers yet</p>
           )}
-        </div>
+        </AnswerContainer>
       </div>
     );
   else {

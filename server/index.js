@@ -11,9 +11,9 @@ main().catch((err) => console.log(err));
 async function main() {
   app.use(cors());
   await mongoose.connect(`${process.env.DATABASE_URL}/mainDb`).then(
-    (res) => console.log("connected"),
-    (err) => console.log("error")
-  );
+    (res) => console.log("Connected to the database"),
+    (err) => console.log("Error connecting to database ->",err.message)
+  )
   app.use(questionsRoutes);
 }
 

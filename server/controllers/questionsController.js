@@ -19,31 +19,8 @@ exports.getQuestion = async (req, res) => {
     res.status(500).send("Error getting question: " + error.message);
   }
 };
-exports.getAllAnswers = async (req, res) => {
-  try {
-    const questionId = req.params.id;
-    const answers = await Answer.find({ questionId });
-    res.status(200).send(answers);
-  } catch (error) {
-    // Handle the error here
-    res.status(500).send("Error getting all questions: " + error.message);
-  }
-};
-exports.addUser = async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
-    if (!user) {
-      const newUser = new User({ username, password });
-      await newUser.save();
-      res.status(200).send("User added");
-    } else {
-      return res.status(409).send("username already exists");
-    }
-  } catch (error) {
-    res.status(500).send("Error creating new User: " + error.message);
-  }
-};
+
+
 exports.addQuestion = async (req, res) => {
   try {
     const { username, title, body, tags } = req.body;
@@ -60,20 +37,7 @@ exports.addQuestion = async (req, res) => {
   }
 };
 
-exports.addAnswer = async (req, res) => {
-  try {
-    const questionId = req.params.id;
-    const { answerDetail } = req.body;
-    const newAnswer = new Answer({ questionId, answerDetail, acceptedBy: [] });
-    const addedAnswer = await newAnswer.save().then((ans) => {
-      return ans;
-    });
-    return res.status(200).send(addedAnswer);
-  } catch (error) {
-    // Handle the error here
-    res.status(500).send("Error adding new answer: " + error.message);
-  }
-};
+
 
 exports.editQuestion = async (req, res) => {
   try {
@@ -101,4 +65,3 @@ exports.editQuestion = async (req, res) => {
   }
 };
 
-exports;
